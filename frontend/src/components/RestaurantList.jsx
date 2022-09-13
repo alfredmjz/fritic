@@ -36,7 +36,7 @@ const RestaurantList = (props) => {
 			await oishee.remove(id);
 			setRestaurants(
 				restaurants.filter((restaurant) => {
-					return restaurant.restaurant_uid !== id;
+					return restaurant.uuid !== id;
 				})
 			);
 		} catch (err) {
@@ -63,19 +63,20 @@ const RestaurantList = (props) => {
 				<tbody>
 					{restaurants &&
 						restaurants.map((restaurant) => {
+							console.log(restaurant);
 							return (
-								<tr onClick={() => handleSelected(restaurant.restaurant_uid)} key={restaurant.restaurant_uid}>
+								<tr onClick={() => handleSelected(restaurant.uuid)} key={restaurant.uuid}>
 									<td>{restaurant.name}</td>
 									<td>{restaurant.address}</td>
 									<td>{"$".repeat(restaurant.price_range)}</td>
 									<td>Review</td>
 									<td>
-										<button onClick={(e) => handleUpdate(e, restaurant.restaurant_uid)} className='btn btn-warning'>
+										<button onClick={(e) => handleUpdate(e, restaurant.uuid)} className='btn btn-warning'>
 											Update
 										</button>
 									</td>
 									<td>
-										<button onClick={(e) => handleDelete(e, restaurant.restaurant_uid)} className='btn btn-danger'>
+										<button onClick={(e) => handleDelete(e, restaurant.uuid)} className='btn btn-danger'>
 											Delete
 										</button>
 									</td>

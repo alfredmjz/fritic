@@ -20,14 +20,18 @@ const RestaurantList = (props) => {
 		initializeList();
 	}, []);
 
-	const handleUpdate = async (id) => {
+	const handleUpdate = async (e, id) => {
+		e.stopPropagation();
+
 		try {
 			navigate(`/restaurant/${id}/update`);
 		} catch (err) {
 			console.error(err);
 		}
 	};
-	const handleDelete = async (id) => {
+	const handleDelete = async (e, id) => {
+		e.stopPropagation();
+
 		try {
 			await oishee.remove(id);
 			setRestaurants(
@@ -38,6 +42,10 @@ const RestaurantList = (props) => {
 		} catch (err) {
 			console.error(err);
 		}
+	};
+
+	const handleSelected = async (id) => {
+		navigate(`/restaurant/${id}`);
 	};
 	return (
 		<div className='list-group'>
@@ -56,18 +64,18 @@ const RestaurantList = (props) => {
 					{restaurants &&
 						restaurants.map((restaurant) => {
 							return (
-								<tr key={restaurant.restaurant_uid}>
+								<tr onClick={() => handleSelected(restaurant.restaurant_uid)} key={restaurant.restaurant_uid}>
 									<td>{restaurant.name}</td>
 									<td>{restaurant.address}</td>
 									<td>{"$".repeat(restaurant.price_range)}</td>
 									<td>Review</td>
 									<td>
-										<button onClick={() => handleUpdate(restaurant.restaurant_uid)} className='btn btn-warning'>
+										<button onClick={(e) => handleUpdate(e, restaurant.restaurant_uid)} className='btn btn-warning'>
 											Update
 										</button>
 									</td>
 									<td>
-										<button onClick={() => handleDelete(restaurant.restaurant_uid)} className='btn btn-danger'>
+										<button onClick={(e) => handleDelete(e, restaurant.restaurant_uid)} className='btn btn-danger'>
 											Delete
 										</button>
 									</td>

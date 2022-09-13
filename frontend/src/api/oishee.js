@@ -6,6 +6,11 @@ const getAll = async () => {
 	return request.data;
 };
 
+const getOne = async (id) => {
+	const newUrl = baseUrl + `/${id}`;
+	const request = await axios.get(newUrl);
+	return request.data;
+};
 const create = async (newObject) => {
 	const request = await axios.post(baseUrl, newObject);
 	return request.data;
@@ -22,5 +27,5 @@ const remove = async (id) => {
 	const request = await axios.delete(newUrl);
 	return request.data;
 };
-const toExport = { getAll, create, update, remove };
+const toExport = { getOne, getAll, create, update, remove };
 export default toExport;

@@ -1,10 +1,12 @@
 import React, { useContext } from "react";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import oishee from "../api/oishee";
 import { RestaurantContext } from "../context/RestaurantContext";
 
 const RestaurantList = (props) => {
 	const { restaurants, setRestaurants } = useContext(RestaurantContext);
+	const navigate = useNavigate();
 	useEffect(() => {
 		const initializeList = async () => {
 			try {
@@ -18,6 +20,13 @@ const RestaurantList = (props) => {
 		initializeList();
 	}, []);
 
+	const handleUpdate = async (id) => {
+		try {
+			navigate(`/restaurant/${id}/update`);
+		} catch (err) {
+			console.error(err);
+		}
+	};
 	const handleDelete = async (id) => {
 		try {
 			await oishee.remove(id);
@@ -53,7 +62,9 @@ const RestaurantList = (props) => {
 									<td>{"$".repeat(restaurant.price_range)}</td>
 									<td>Review</td>
 									<td>
-										<button className='btn btn-warning'>Update</button>
+										<button onClick={() => handleUpdate(restaurant.restaurant_uid)} className='btn btn-warning'>
+											Update
+										</button>
 									</td>
 									<td>
 										<button onClick={() => handleDelete(restaurant.restaurant_uid)} className='btn btn-danger'>

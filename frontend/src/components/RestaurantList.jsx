@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import oishee from "../api/oishee";
 import { RestaurantContext } from "../context/RestaurantContext";
+import StarRating from "./StarRating";
 
 const RestaurantList = (props) => {
 	const { restaurants, setRestaurants } = useContext(RestaurantContext);
@@ -47,6 +48,18 @@ const RestaurantList = (props) => {
 	const handleSelected = async (id) => {
 		navigate(`/restaurant/${id}`);
 	};
+
+	const renderRating = (restaurant) => {
+		if (!restaurant.count) {
+			return <span className='text-warning'>No reviews</span>;
+		}
+		return (
+			<>
+				<StarRating rating={restaurant.average_rating} />
+				<span className='text-warning ms-1'>({restaurant.count})</span>
+			</>
+		);
+	};
 	return (
 		<div className='list-group'>
 			<table className='table table-hover table-dark'>
@@ -63,13 +76,12 @@ const RestaurantList = (props) => {
 				<tbody>
 					{restaurants &&
 						restaurants.map((restaurant) => {
-							console.log(restaurant);
 							return (
 								<tr onClick={() => handleSelected(restaurant.uuid)} key={restaurant.uuid}>
 									<td>{restaurant.name}</td>
 									<td>{restaurant.address}</td>
 									<td>{"$".repeat(restaurant.price_range)}</td>
-									<td>Review</td>
+									<td>{renderRating(restaurant)}</td>
 									<td>
 										<button onClick={(e) => handleUpdate(e, restaurant.uuid)} className='btn btn-warning'>
 											Update

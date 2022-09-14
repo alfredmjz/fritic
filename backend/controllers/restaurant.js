@@ -4,7 +4,12 @@ const db = require("../database/index.js");
 //Get all restaurants
 restaurantRouter.get("/", async (req, res, next) => {
 	try {
-		const results = await db.query("SELECT * FROM restaurant");
+		const results = await db.query(
+			"SELECT uuid, * FROM restaurant LEFT JOIN " +
+				"(SELECT restaurant_uuid, COUNT(*), TRUNC(AVG(ratings), 1) AS average_rating " +
+				"FROM review GROUP BY restaurant_uuid) review ON restaurant.uuid = review.restaurant_uuid;"
+		);
+
 		res.status(200).json({
 			status: "success",
 			results: results.rowCount,
@@ -21,7 +26,13 @@ restaurantRouter.get("/", async (req, res, next) => {
 restaurantRouter.get("/:id", async (req, res, next) => {
 	try {
 		const id = req.params.id;
-		const restaurants = await db.query("SELECT * FROM restaurant WHERE uuid = $1", [id]);
+		const restaurants = await db.query(
+			"SELECT * FROM restaurant LEFT JOIN " +
+				"(SELECT restaurant_uuid, COUNT(*), TRUNC(AVG(ratings), 1) AS average_rating " +
+				"FROM review GROUP BY restaurant_uuid) review ON " +
+				"restaurant.restaurant_uuid = review.restaurant_uuid WHERE uuid = $1;",
+			[id]
+		);
 		const reviews = await db.query("SELECT * FROM review WHERE restaurant_uuid = $1", [id]);
 
 		res.status(200).json({

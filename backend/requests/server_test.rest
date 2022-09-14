@@ -27,3 +27,14 @@ Content-type: application/json
 
 ###
 DELETE http://localhost:3001/api/v1/restaurants/8429acc7-3451-401a-af19-c77da11ad4ec
+
+
+###
+POST http://localhost:3001/api/v1/restaurants/1de3d303-a98a-40ff-8411-9ff496c49353/addreview HTTP/1.1
+Content-type: application/json
+
+{
+  "name": "John",
+  "content": "TEST - Pretty good",
+  "rating": 3
+}

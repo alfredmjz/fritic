@@ -91,4 +91,24 @@ restaurantRouter.delete("/:id", async (req, res, next) => {
 	}
 });
 
+//Add review
+restaurantRouter.post("/:id/addreview", async (req, res, next) => {
+	try {
+		const id = req.params.id;
+		const { name, content, rating } = req.body;
+		const newReview = await db.query(
+			"INSERT INTO review(uuid, restaurant_uuid, name, content, ratings) VALUES (uuid_generate_v4(), $1, $2, $3, $4) RETURNING *;",
+			[id, name, content, rating]
+		);
+		res.status(201).json({
+			status: "success",
+			data: {
+				review: newReview.rows[0],
+			},
+		});
+	} catch (err) {
+		console.error(err);
+	}
+});
+
 module.exports = restaurantRouter;

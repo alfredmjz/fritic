@@ -11,11 +11,16 @@ const getOne = async (id) => {
 	const request = await axios.get(newUrl);
 	return request.data;
 };
-const create = async (newObject) => {
+const createRestaurant = async (newObject) => {
 	const request = await axios.post(baseUrl, newObject);
 	return request.data;
 };
 
+const createReview = async (id, newObject) => {
+	const newUrl = baseUrl + `/${id}/addreview`;
+	const request = await axios.post(newUrl, newObject);
+	return request.data;
+};
 const update = async (id, newObject) => {
 	const newUrl = baseUrl + `/${id}`;
 	const request = await axios.put(newUrl, newObject);
@@ -27,5 +32,6 @@ const remove = async (id) => {
 	const request = await axios.delete(newUrl);
 	return request.data;
 };
-const toExport = { getOne, getAll, create, update, remove };
+
+const toExport = { getOne, getAll, createRestaurant, createReview, update, remove };
 export default toExport;

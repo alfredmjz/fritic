@@ -1,10 +1,27 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { useParams } from "react-router-dom";
+import oishee from "../api/oishee";
+import { RestaurantContext } from "../context/RestaurantContext";
 
 const AddReview = () => {
+	const { id } = useParams();
+	const { selectedRestaurant, setSelectedRestaurant } = useContext(RestaurantContext);
 	const [name, setName] = useState("");
 	const [content, setContent] = useState("");
-	const [rating, setRating] = useState("");
+	const [ratings, setRatings] = useState(1);
 
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		try {
+			const response = await oishee.createReview(id, { restaurant_uuid: id, name, content, ratings });
+			setSelectedRestaurant({
+				...selectedRestaurant,
+				review: selectedRestaurant.review.concat(response.data.review),
+			});
+		} catch (err) {
+			console.error(err);
+		}
+	};
 	return (
 		<div className='mb-2'>
 			<form action=''>
@@ -22,7 +39,7 @@ const AddReview = () => {
 					</div>
 					<div className='col'>
 						<label htmlFor='rating'>Rating</label>
-						<select value={rating} onChange={(e) => setRating(e.target.value)} id='rating' className='form-select'>
+						<select value={ratings} onChange={(e) => setRatings(e.target.value)} id='rating' className='form-select'>
 							<option disabled></option>
 							<option value='1'>1</option>
 							<option value='2'>2</option>
@@ -42,7 +59,9 @@ const AddReview = () => {
 						placeholder='Write a review'
 					></textarea>
 				</div>
-				<button className='mt-3 btn btn-primary'>Submit</button>
+				<button type='submit' onClick={handleSubmit} className='mt-3 btn btn-primary'>
+					Submit
+				</button>
 			</form>
 		</div>
 	);

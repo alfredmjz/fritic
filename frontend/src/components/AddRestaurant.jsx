@@ -12,7 +12,7 @@ export const AddRestaurant = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			const response = await oishee.create({ name, address: location, price_range: priceRange });
+			const response = await oishee.createRestaurant({ name, address: location, price_range: priceRange });
 			addRestaurant(response.data.restaurant);
 		} catch (err) {
 			console.error(err);

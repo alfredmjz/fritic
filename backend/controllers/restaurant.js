@@ -95,10 +95,10 @@ restaurantRouter.delete("/:id", async (req, res, next) => {
 restaurantRouter.post("/:id/addreview", async (req, res, next) => {
 	try {
 		const id = req.params.id;
-		const { name, content, rating } = req.body;
+		const { name, content, ratings } = req.body;
 		const newReview = await db.query(
 			"INSERT INTO review(uuid, restaurant_uuid, name, content, ratings) VALUES (uuid_generate_v4(), $1, $2, $3, $4) RETURNING *;",
-			[id, name, content, rating]
+			[id, name, content, ratings]
 		);
 		res.status(201).json({
 			status: "success",

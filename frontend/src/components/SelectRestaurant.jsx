@@ -7,7 +7,7 @@ import AddReview from "./AddReview";
 import Review from "./Review";
 import StarRating from "./StarRating";
 
-const SelectRestaurant = (props) => {
+const SelectRestaurant = () => {
 	const { id } = useParams();
 	const { selectedRestaurant, setSelectedRestaurant } = useContext(RestaurantContext);
 

@@ -1,5 +1,4 @@
 import React, { useState, createContext } from "react";
-
 export const RestaurantContext = createContext();
 
 export const RestaurantContextProvider = (props) => {
@@ -9,6 +8,7 @@ export const RestaurantContextProvider = (props) => {
 	const addRestaurant = (restaurant) => {
 		setRestaurants([...restaurants, restaurant]);
 	};
+
 	return (
 		<RestaurantContext.Provider
 			value={{ restaurants, setRestaurants, addRestaurant, selectedRestaurant, setSelectedRestaurant }}

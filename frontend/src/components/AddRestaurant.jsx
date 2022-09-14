@@ -20,11 +20,11 @@ export const AddRestaurant = () => {
 	};
 
 	return (
-		<div className='container text-center'>
+		<div className='container text-center mb-5'>
 			<form className='row' action=''>
 				<div className='col'>
 					<input
-						input={name}
+						value={name}
 						onChange={(e) => setName(e.target.value)}
 						type='text'
 						placeholder='Name'
@@ -33,7 +33,7 @@ export const AddRestaurant = () => {
 				</div>
 				<div className='col'>
 					<input
-						input={location}
+						value={location}
 						onChange={(e) => setLocation(e.target.value)}
 						type='text'
 						placeholder='Location'
@@ -41,7 +41,7 @@ export const AddRestaurant = () => {
 					/>
 				</div>
 				<div className='col-auto'>
-					<select input={priceRange} onChange={(e) => setPriceRange(e.target.value)} className='form-select'>
+					<select value={priceRange} onChange={(e) => setPriceRange(e.target.value)} className='form-select'>
 						<option disabled>Price Range</option>
 						<option value='1'>$</option>
 						<option value='2'>$$</option>

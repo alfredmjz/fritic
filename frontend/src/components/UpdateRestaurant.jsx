@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import oishee from "../api/oishee";
 
-const UpdateRestaurant = (props) => {
+const UpdateRestaurant = () => {
 	const { id } = useParams();
 	const [name, setName] = useState("");
 	const [location, setLocation] = useState("");
@@ -23,7 +23,7 @@ const UpdateRestaurant = (props) => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			const request = await oishee.update(id, {
+			await oishee.update(id, {
 				name,
 				address: location,
 				price_range: priceRange,

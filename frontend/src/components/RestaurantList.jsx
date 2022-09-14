@@ -5,9 +5,10 @@ import oishee from "../api/oishee";
 import { RestaurantContext } from "../context/RestaurantContext";
 import StarRating from "./StarRating";
 
-const RestaurantList = (props) => {
+const RestaurantList = () => {
 	const { restaurants, setRestaurants } = useContext(RestaurantContext);
 	const navigate = useNavigate();
+
 	useEffect(() => {
 		const initializeList = async () => {
 			try {
@@ -95,18 +96,6 @@ const RestaurantList = (props) => {
 								</tr>
 							);
 						})}
-					{/* <tr>
-						<td>Mark</td>
-						<td>Otto</td>
-						<td>@mdo</td>
-						<td>@mdo</td>
-						<td>
-							<button className='btn btn-warning'>Update</button>
-						</td>
-						<td>
-							<button className='btn btn-danger'>Delete</button>
-						</td>
-					</tr> */}
 				</tbody>
 			</table>
 		</div>

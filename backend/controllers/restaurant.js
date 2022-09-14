@@ -27,10 +27,9 @@ restaurantRouter.get("/:id", async (req, res, next) => {
 	try {
 		const id = req.params.id;
 		const restaurants = await db.query(
-			"SELECT * FROM restaurant LEFT JOIN " +
+			"SELECT uuid, * FROM restaurant LEFT JOIN " +
 				"(SELECT restaurant_uuid, COUNT(*), TRUNC(AVG(ratings), 1) AS average_rating " +
-				"FROM review GROUP BY restaurant_uuid) review ON " +
-				"restaurant.restaurant_uuid = review.restaurant_uuid WHERE uuid = $1;",
+				"FROM review GROUP BY restaurant_uuid) review ON restaurant.uuid = review.restaurant_uuid WHERE uuid = $1;",
 			[id]
 		);
 		const reviews = await db.query("SELECT * FROM review WHERE restaurant_uuid = $1", [id]);

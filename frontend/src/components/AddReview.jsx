@@ -5,7 +5,7 @@ import { RestaurantContext } from "../context/RestaurantContext";
 
 const AddReview = () => {
 	const { id } = useParams();
-	const { selectedRestaurant, setSelectedRestaurant } = useContext(RestaurantContext);
+	const { setClicked, selectedRestaurant, setSelectedRestaurant } = useContext(RestaurantContext);
 	const [name, setName] = useState("");
 	const [content, setContent] = useState("");
 	const [ratings, setRatings] = useState(1);
@@ -18,6 +18,7 @@ const AddReview = () => {
 				...selectedRestaurant,
 				review: selectedRestaurant.review.concat(response.data.review),
 			});
+			setClicked(1);
 		} catch (err) {
 			console.error(err);
 		}

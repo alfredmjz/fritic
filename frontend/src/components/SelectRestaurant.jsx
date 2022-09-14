@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import oishee from "../api/oishee";
+import StarRating from "./StarRating";
 
 const SelectRestaurant = (props) => {
 	const { id } = useParams();
@@ -22,7 +23,7 @@ const SelectRestaurant = (props) => {
 
 	return (
 		<div>
-			<h1 className='text-center'>{selectedRestaurant && selectedRestaurant.name}</h1>
+			<h1 className='text-center'>{selectedRestaurant && <StarRating rating={5} />}</h1>
 		</div>
 	);
 };

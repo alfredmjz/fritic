@@ -49,10 +49,10 @@ restaurantRouter.get("/:id", async (req, res, next) => {
 //Create a restaurant
 restaurantRouter.post("/", async (req, res, next) => {
 	try {
-		const { name, cuisine, address, price_range } = req.body;
+		const { name, address, price_range } = req.body;
 		const results = await db.query(
-			"INSERT INTO restaurant (uuid, name, cuisine, address, price_range) VALUES (uuid_generate_v4(), $1, $2, $3, $4) RETURNING *",
-			[name, cuisine, address, price_range]
+			"INSERT INTO restaurant (uuid, name, address, price_range) VALUES (uuid_generate_v4(), $1, $2, $3) RETURNING *",
+			[name, address, price_range]
 		);
 		res.status(200).json({
 			status: "success",
@@ -69,10 +69,10 @@ restaurantRouter.post("/", async (req, res, next) => {
 restaurantRouter.put("/:id", async (req, res, next) => {
 	try {
 		const id = req.params.id;
-		const { name, cuisine, address, price_range } = req.body;
+		const { name, address, price_range } = req.body;
 		const results = await db.query(
-			"UPDATE restaurant SET name = $1, cuisine = $2, address = $3, price_range = $4 WHERE uuid = $5 RETURNING *",
-			[name, cuisine, address, price_range, id]
+			"UPDATE restaurant SET name = $1, address = $2, price_range = $3 WHERE uuid = $5 RETURNING *",
+			[name, address, price_range, id]
 		);
 		res.status(200).json({
 			status: "success",

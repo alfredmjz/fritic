@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS review;
+
 CREATE TABLE review (
   uuid UUID NOT NULL PRIMARY KEY,
   restaurant_uuid UUID NOT NULL REFERENCES restaurant(uuid) ,

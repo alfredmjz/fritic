@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS restaurant;
+
 CREATE TABLE restaurant (
   uuid UUID NOT NULL PRIMARY KEY,
   name VARCHAR(50) NOT NULL,

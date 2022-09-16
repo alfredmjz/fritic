@@ -1,3 +1,5 @@
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 const restaurantRouter = require("express").Router();
 const db = require("../database/index.js");
 

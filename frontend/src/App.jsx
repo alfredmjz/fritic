@@ -5,6 +5,7 @@ import Home from "./router/Home";
 import Restaurant from "./router/Restaurant";
 import Update from "./router/Update";
 import Login from "./router/Login";
+import Register from "./router/Register";
 
 const App = () => {
 	return (
@@ -16,6 +17,7 @@ const App = () => {
 						<Route exact path='/restaurant/:id/update' element={<Update />} />
 						<Route exact path='/restaurant/:id' element={<Restaurant />} />
 						<Route exact path='/fritic/users/login' element={<Login />} />
+						<Route exact path='/fritic/users/register' element={<Register />} />
 					</Routes>
 				</BrowserRouter>
 			</div>

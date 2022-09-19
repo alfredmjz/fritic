@@ -2,7 +2,7 @@ const dayjs = require("dayjs");
 const customParseFormat = require("dayjs/plugin/customParseFormat");
 const bcrypt = require("bcrypt");
 const usersRouter = require("express").Router();
-const friticUser = require("../database/index");
+const db = require("../database/index");
 
 dayjs.extend(customParseFormat);
 
@@ -23,7 +23,7 @@ usersRouter.get("/", async (req, res, next) => {
 });
 
 //Creat new user
-usersRouter.post("/", async (req, res, next) => {
+usersRouter.post("/register", async (req, res, next) => {
 	try {
 		const { name, password, email, phoneNumber } = req.body;
 		if (!name) {
@@ -47,9 +47,7 @@ usersRouter.post("/", async (req, res, next) => {
 			});
 		}
 
-		const existingUser = await friticUser.query(
-			"SELECT email, COUNT(*) from friticuser GROUP BY email HAVING COUNT(*) > 1"
-		);
+		const existingUser = await db.query("SELECT email, COUNT(*) from friticuser GROUP BY email HAVING COUNT(*) > 1");
 		if (existingUser.rowCount > 0) {
 			return res.status(400).json({
 				error: "email must be unique",
@@ -58,7 +56,7 @@ usersRouter.post("/", async (req, res, next) => {
 		const saltRounds = 10;
 		const passwordHash = await bcrypt.hash(password, saltRounds);
 		const currentTime = dayjs().format("YYYY-MM-DD HH:mm:ss-0");
-		const registeredUser = await friticUser.query(
+		const registeredUser = await db.query(
 			"INSERT INTO friticuser(uuid, name, passwordHash,  email,  phoneNumber, lastLogin) " +
 				"VALUES(uuid_generate_v4(), $1, $2, $3, $4, $5) RETURNING *",
 			[name, passwordHash, email, phoneNumber, currentTime]

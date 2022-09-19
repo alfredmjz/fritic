@@ -8,11 +8,11 @@ CREATE TABLE review (
   ratings INT NOT NULL CHECK(ratings >= 1 AND ratings <= 5)
 );
 
-INSERT INTO review(uuid, restaurant_uuid, name, content, ratings) VALUES(uuid_generate_v4(), '1de3d303-a98a-40ff-8411-9ff496c49353','Alex', 'Absolutely amazing', 4);
-INSERT INTO review(uuid, restaurant_uuid, name, content, ratings) VALUES(uuid_generate_v4(), '1de3d303-a98a-40ff-8411-9ff496c49353','Johan', 'My favourite goto', 5);
-INSERT INTO review(uuid, restaurant_uuid, name, content, ratings) VALUES(uuid_generate_v4(), '1de3d303-a98a-40ff-8411-9ff496c49353','Jessica', 'I love the food but service was too slow', 2);
-INSERT INTO review(uuid, restaurant_uuid, name, content, ratings) VALUES(uuid_generate_v4(), '52b27b8c-e596-4f5d-bb1d-0f4488547f80', 'Xihong', 'Mediocre', 3);
-INSERT INTO review(uuid, restaurant_uuid, name, content, ratings) VALUES(uuid_generate_v4(), '4da9e368-cd09-482c-87b6-9520a56cf234','Brittany', 'Too spicy for my liking', 2);
-INSERT INTO review(uuid, restaurant_uuid, name, content, ratings) VALUES(uuid_generate_v4(), 'fc5895e9-1570-4cb3-8441-399834f5c770','Alice',  'I love the food and the vibe', 5);
-INSERT INTO review(uuid, restaurant_uuid, name, content, ratings) VALUES(uuid_generate_v4(), 'fc5895e9-1570-4cb3-8441-399834f5c770','Han',  'Hidden gem', 5);
-INSERT INTO review(uuid, restaurant_uuid, name, content, ratings) VALUES(uuid_generate_v4(), '487b6676-a894-4e85-bee2-06b6bc8045d0','June',  'Celebrated my birthday here but was dissapointed by the food', 2);
+INSERT INTO review(uuid, restaurant_uuid, name, content, ratings) VALUES(uuid_generate_v4(), '2e1c5f0d-45fb-4f1e-8894-f73a7f8ba83c','Alex', 'Absolutely amazing', 4);
+INSERT INTO review(uuid, restaurant_uuid, name, content, ratings) VALUES(uuid_generate_v4(), '2e1c5f0d-45fb-4f1e-8894-f73a7f8ba83c','Johan', 'My favourite goto', 5);
+INSERT INTO review(uuid, restaurant_uuid, name, content, ratings) VALUES(uuid_generate_v4(), '2e1c5f0d-45fb-4f1e-8894-f73a7f8ba83c','Jessica', 'I love the food but service was too slow', 2);
+INSERT INTO review(uuid, restaurant_uuid, name, content, ratings) VALUES(uuid_generate_v4(), 'f2182d88-518d-4458-a279-b908e0b36597', 'Xihong', 'Mediocre', 3);
+INSERT INTO review(uuid, restaurant_uuid, name, content, ratings) VALUES(uuid_generate_v4(), '3824ac76-8e75-410b-ab03-1786bb730fe8','Brittany', 'Too spicy for my liking', 2);
+INSERT INTO review(uuid, restaurant_uuid, name, content, ratings) VALUES(uuid_generate_v4(), '5b2a51e5-b6d3-4520-8494-e717be9cc037','Alice',  'I love the food and the vibe', 5);
+INSERT INTO review(uuid, restaurant_uuid, name, content, ratings) VALUES(uuid_generate_v4(), '5b2a51e5-b6d3-4520-8494-e717be9cc037','Han',  'Hidden gem', 5);
+INSERT INTO review(uuid, restaurant_uuid, name, content, ratings) VALUES(uuid_generate_v4(), 'fade805b-e9c4-46d8-95c3-1f5a0cba5e58','June',  'Celebrated my birthday here but was dissapointed by the food', 2);

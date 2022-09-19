@@ -1,5 +1,6 @@
 const dayjs = require("dayjs");
 const customParseFormat = require("dayjs/plugin/customParseFormat");
+const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const usersRouter = require("express").Router();
 const db = require("../database/index");
@@ -22,7 +23,7 @@ usersRouter.get("/", async (req, res, next) => {
 	}
 });
 
-//Creat new user
+//Create new user
 usersRouter.post("/register", async (req, res, next) => {
 	try {
 		const { name, password, email, phoneNumber } = req.body;
@@ -71,6 +72,30 @@ usersRouter.post("/register", async (req, res, next) => {
 	} catch (err) {
 		next(err);
 	}
+});
+
+usersRouter.post("/login", async (req, res) => {
+	const { email, password } = req.body;
+
+	const user = await db.query("SELECT uuid, name, email, passwordhash FROM friticuser WHERE email = $1", [email]);
+	const passwordCorrect =
+		user.rows[0] === undefined ? false : await bcrypt.compare(password, user.rows[0].passwordhash);
+
+	if (!(user.rows[0] && passwordCorrect)) {
+		return res.status(401).json({
+			error: "invalid email or password",
+		});
+	}
+
+	const userForToken = {
+		email: user.rows[0].email,
+		uuid: user.rows[0].uuid,
+	};
+
+	// token expires in 3600 seconds; 1 hour
+	const duration = 3600;
+	const token = jwt.sign(userForToken, process.env.SECRET, { expiresIn: duration });
+	res.status(200).send({ token, email: user.rows[0].email, name: user.rows[0].name });
 });
 
 module.exports = usersRouter;

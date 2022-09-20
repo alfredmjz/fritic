@@ -1,8 +1,18 @@
 import React from "react";
+import { useState } from "react";
+import CountryFlag from "./CountryFlag";
 
 export const AccountRegister = () => {
+	const [isToggle, setToggle] = useState(false);
+	const [countryList, setCountryList] = useState([]);
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
+	};
+
+	const displayFlags = (e) => {
+		e.preventDefault();
+		setToggle(!isToggle);
 	};
 
 	return (
@@ -39,10 +49,18 @@ export const AccountRegister = () => {
 						<label htmlFor='inputPassword5' className='form-label'>
 							Phone Number
 						</label>
-						<div className='input-group'>
-							<span className='input-group-text' id='basic-addon1'>
-								@
-							</span>
+						<div className='input-group '>
+							<div onClick={(e) => displayFlags(e)} className='input-group-text select-wrapper'>
+								{
+									<CountryFlag
+										countryList={countryList}
+										setCountryList={setCountryList}
+										isToggle={isToggle}
+										setToggle={setToggle}
+									/>
+								}
+							</div>
+
 							<input
 								type='password'
 								id='inputPassword5'

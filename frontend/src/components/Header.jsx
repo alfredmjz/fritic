@@ -16,7 +16,7 @@ export const Header = () => {
 		<div className='container-fluid'>
 			<div className='row align-items-center'>
 				<div className='col-10 '>
-					<h1 className='font-weight-light display-1 text-left'>Oishee</h1>
+					<h1 className='font-weight-light display-1 text-left'>Fritic</h1>
 				</div>
 				<div className='col-2 justify-content-md-end'>
 					<button onClick={handleLogin} className='btn btn-bg btn-primary me-md-2' type='button'>

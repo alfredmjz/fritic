@@ -2,7 +2,7 @@
 import React, { useContext } from "react";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import oishee from "../api/oishee";
+import fritic from "../api/fritic";
 import { RestaurantContext } from "../context/RestaurantContext";
 import AddReview from "./AddReview";
 import Review from "./Review";
@@ -15,7 +15,7 @@ const SelectRestaurant = () => {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const response = await oishee.getOne(id);
+				const response = await fritic.getOne(id);
 				setSelectedRestaurant(response.data);
 				setClicked(0);
 			} catch (err) {

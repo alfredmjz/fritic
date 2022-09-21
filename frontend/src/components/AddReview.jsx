@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
-import oishee from "../api/oishee";
+import fritic from "../api/fritic";
 import { RestaurantContext } from "../context/RestaurantContext";
 
 const AddReview = () => {
@@ -13,7 +13,7 @@ const AddReview = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			const response = await oishee.createReview(id, { restaurant_uuid: id, name, content, ratings });
+			const response = await fritic.createReview(id, { restaurant_uuid: id, name, content, ratings });
 			setSelectedRestaurant({
 				...selectedRestaurant,
 				review: selectedRestaurant.review.concat(response.data.review),

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import oishee from "../api/oishee";
+import fritic from "../api/fritic";
 
 const UpdateRestaurant = () => {
 	const { id } = useParams();
@@ -12,7 +12,7 @@ const UpdateRestaurant = () => {
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const response = await oishee.getOne(id);
+			const response = await fritic.getOne(id);
 			setName(response.data.restaurant.name);
 			setLocation(response.data.restaurant.address);
 			setPriceRange(response.data.restaurant.price_range);
@@ -23,7 +23,7 @@ const UpdateRestaurant = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			await oishee.update(id, {
+			await fritic.update(id, {
 				name,
 				address: location,
 				price_range: priceRange,

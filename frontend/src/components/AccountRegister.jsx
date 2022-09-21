@@ -1,18 +1,26 @@
-import React from "react";
-import { useState } from "react";
+/* eslint-disable no-unused-vars */
+import React, { useState } from "react";
 import CountryFlag from "./CountryFlag";
+import { useEffect } from "react";
+import countries from "../api/countries";
 
 export const AccountRegister = () => {
-	const [isToggle, setToggle] = useState(false);
-	const [countryList, setCountryList] = useState([]);
+	const [countryList, setCountryList] = useState(null);
+
+	useEffect(() => {
+		const initializeList = async () => {
+			try {
+				const response = await countries.getAll();
+				setCountryList(response);
+			} catch (err) {
+				console.error(err);
+			}
+		};
+		initializeList();
+	}, []);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-	};
-
-	const displayFlags = (e) => {
-		e.preventDefault();
-		setToggle(!isToggle);
 	};
 
 	return (
@@ -24,49 +32,35 @@ export const AccountRegister = () => {
 						<label htmlFor='Name' className='form-label'>
 							Full Name
 						</label>
-						<input type='email' className='form-control' id='exampleInputEmail1' aria-describedby='emailHelp' />
+						<input type='email' className='form-control' />
 					</div>
 					<div className='mb-3'>
 						<label htmlFor='Email Address' className='form-label'>
 							Email address
 						</label>
-						<input type='email' className='form-control' id='exampleInputEmail1' aria-describedby='emailHelp' />
+						<input type='email' className='form-control' />
 						<div id='emailHelp' className='form-text'>
 							<span>We{"'"}ll never share your email with anyone else.</span>
 						</div>
 					</div>
 					<div className='mb-3'>
-						<label htmlFor='inputPassword5' className='form-label'>
+						<label htmlFor='inputPassword' className='form-label'>
 							Password
 						</label>
-						<input type='password' id='inputPassword5' className='form-control' aria-describedby='passwordHelpBlock' />
+						<input type='password' id='inputPassword' className='form-control' />
 						<div id='passwordHelpBlock' className='form-text'>
 							Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces,
 							special characters, or emoji.
 						</div>
 					</div>
 					<div className='mb-3'>
-						<label htmlFor='inputPassword5' className='form-label'>
+						<label htmlFor='Phone Number' className='form-label'>
 							Phone Number
 						</label>
 						<div className='input-group '>
-							<div onClick={(e) => displayFlags(e)} className='input-group-text select-wrapper'>
-								{
-									<CountryFlag
-										countryList={countryList}
-										setCountryList={setCountryList}
-										isToggle={isToggle}
-										setToggle={setToggle}
-									/>
-								}
-							</div>
+							{countryList && <CountryFlag countryList={countryList} />}
 
-							<input
-								type='password'
-								id='inputPassword5'
-								className='form-control'
-								aria-describedby='passwordHelpBlock'
-							/>
+							<input type='password' className='form-control' />
 						</div>
 					</div>
 					<div className='mb-3'>

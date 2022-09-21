@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import oishee from "../api/oishee";
+import fritic from "../api/fritic";
 import { RestaurantContext } from "../context/RestaurantContext";
 import StarRating from "./StarRating";
 
@@ -12,7 +12,7 @@ const RestaurantList = () => {
 	useEffect(() => {
 		const initializeList = async () => {
 			try {
-				const response = await oishee.getAll();
+				const response = await fritic.getAll();
 				setRestaurants(response.data.restaurant);
 			} catch (err) {
 				console.error(err);
@@ -35,7 +35,7 @@ const RestaurantList = () => {
 		e.stopPropagation();
 
 		try {
-			await oishee.remove(id);
+			await fritic.remove(id);
 			setRestaurants(
 				restaurants.filter((restaurant) => {
 					return restaurant.uuid !== id;

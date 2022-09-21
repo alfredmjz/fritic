@@ -270,15 +270,15 @@ const CountryFlag = ({ countryList, setCountryList, isToggle, setToggle }) => {
 		if (!selected) {
 			const source = "http://purecatamphetamine.github.io/country-flag-icons/3x2/CA.svg";
 			return (
-				<div onClick={(e) => handleSelected(e, selected)} className='custom-option' key={"CA"}>
+				<div onClick={(e) => handleSelected(e, selected)} id='selectedCountry' key={"CA"}>
 					<img className='flag-icon' src={source} />
-					<span className='ms-1'>{countryDictionary[0]}</span>
+					<span className='ms-1'>+{countryDictionary.CA}</span>
 				</div>
 			);
 		}
 		const source = `http://purecatamphetamine.github.io/country-flag-icons/3x2/${selected}.svg`;
 		return (
-			<div onClick={(e) => handleSelected(e, selected)} className='custom-option' key={selected}>
+			<div onClick={(e) => handleSelected(e, selected)} id='selectedCountry' key={selected}>
 				<img className='flag-icon' src={source} />
 				<span className='ms-1'>+{countryDictionary[selected]}</span>
 			</div>
@@ -291,10 +291,7 @@ const CountryFlag = ({ countryList, setCountryList, isToggle, setToggle }) => {
 	}
 	return (
 		<div className='select'>
-			<div className='select-trigger'>
-				{displayFlag()}
-				<span className='ms-2 mb-1'> +1</span>
-			</div>
+			<div className='select-trigger'>{displayFlag()}</div>
 			<div className={toggleDropdown}>{countryList}</div>
 		</div>
 	);

@@ -25,7 +25,10 @@ export const AccountRegister = () => {
 
 	return (
 		<div>
-			<div className='container-fluid mx-auto my-5 px-4 py-5 border rounded-4' style={{ maxWidth: "35%" }}>
+			<div
+				className='container-fluid mx-auto my-5 px-4 py-5 border rounded-4'
+				style={{ maxWidth: "35%", height: "100vh" }}
+			>
 				<h3 className='font-weight-light text-center mb-5'>Register an account</h3>
 				<form action=''>
 					<div className='mb-3'>
@@ -57,13 +60,13 @@ export const AccountRegister = () => {
 						<label htmlFor='Phone Number' className='form-label'>
 							Phone Number
 						</label>
-						<div className='input-group '>
+						<div className='input-group ms-n1'>
 							{countryList && <CountryFlag countryList={countryList} />}
 
 							<input type='password' className='form-control' />
 						</div>
 					</div>
-					<div className='mb-3'>
+					<div className='mb-3 mt-5'>
 						<button onClick={(e) => handleSubmit(e)} type='submit' className='btn btn-primary px-4 rounded-3'>
 							Next
 						</button>

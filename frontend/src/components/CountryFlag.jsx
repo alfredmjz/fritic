@@ -1,5 +1,5 @@
 import React from "react";
-import "../assets/style/style.css";
+import "./styles/CountryFlag.css";
 import { useState } from "react";
 
 const CountryFlag = ({ countryList }) => {

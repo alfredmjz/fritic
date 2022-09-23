@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import CountryFlag from "./CountryFlag";
 import { useEffect } from "react";
@@ -27,30 +26,30 @@ export const AccountRegister = () => {
 		<div>
 			<div
 				className='container-fluid mx-auto my-5 px-4 py-5 border rounded-4'
-				style={{ maxWidth: "35%", height: "100vh" }}
+				style={{ maxWidth: "35%", height: "70vh" }}
 			>
 				<h3 className='font-weight-light text-center mb-5'>Register an account</h3>
 				<form action=''>
 					<div className='mb-3'>
 						<label htmlFor='Name' className='form-label'>
-							Full Name
+							Full Name <span className='required-input'>*</span>
 						</label>
-						<input type='email' className='form-control' />
+						<input type='text' className='form-control' required />
 					</div>
 					<div className='mb-3'>
 						<label htmlFor='Email Address' className='form-label'>
-							Email address
+							Email address <span className='required-input'>*</span>
 						</label>
-						<input type='email' className='form-control' />
+						<input type='email' className='form-control' required />
 						<div id='emailHelp' className='form-text'>
 							<span>We{"'"}ll never share your email with anyone else.</span>
 						</div>
 					</div>
 					<div className='mb-3'>
 						<label htmlFor='inputPassword' className='form-label'>
-							Password
+							Password <span className='required-input'>*</span>
 						</label>
-						<input type='password' id='inputPassword' className='form-control' />
+						<input type='password' id='inputPassword' className='form-control' required />
 						<div id='passwordHelpBlock' className='form-text'>
 							Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces,
 							special characters, or emoji.
@@ -58,12 +57,12 @@ export const AccountRegister = () => {
 					</div>
 					<div className='mb-3'>
 						<label htmlFor='Phone Number' className='form-label'>
-							Phone Number
+							Phone Number <span className='required-input'>*</span>
 						</label>
 						<div className='input-group ms-n1'>
 							{countryList && <CountryFlag countryList={countryList} />}
 
-							<input type='password' className='form-control' />
+							<input type='text' className='form-control' required />
 						</div>
 					</div>
 					<div className='mb-3 mt-5'>

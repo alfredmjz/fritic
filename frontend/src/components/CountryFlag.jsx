@@ -16,6 +16,11 @@ const CountryFlag = ({ countryList }) => {
 		setSelected(countryName);
 	};
 
+	const filterCountry = (e) => {
+		e.stopPropagation();
+		setFilter(e.target.value);
+	};
+
 	const displayFlag = () => {
 		if (!selected) {
 			return (
@@ -24,27 +29,34 @@ const CountryFlag = ({ countryList }) => {
 					<span className='ms-1'>{countryList[0].idd.root}</span>
 				</div>
 			);
-		} else {
-			const selectedPlaceholder = countryList.find((country) => country.name.common === selected);
-			setSelected(null);
-			return (
-				<div>
-					<img className='flag-icon' src={selectedPlaceholder.flags.svg} />
-					<span className='ms-1'>{selectedPlaceholder.idd.root}</span>
-				</div>
-			);
 		}
+		const selectedPlaceholder = countryList.find((country) => country.name.common === selected);
+		return (
+			<div>
+				<img className='flag-icon' src={selectedPlaceholder.flags.svg} />
+				<span className='ms-1'>{selectedPlaceholder.idd.root}</span>
+			</div>
+		);
 	};
 
-	//TODO: implement filtering
-	const filterCountry = (e) => {
-		e.stopPropagation();
-		setFilter(e.target.value);
+	const displayFiltered = () => {
 		if (filter !== "") {
 			return countryList
-				.filter((country) => country.name.toUpperCase().indexOf(filter.toUpperCase()) > -1)
-				.map(() => {});
+				.filter((country) => country.name.common.toUpperCase().indexOf(filter.toUpperCase()) > -1)
+				.map((country, index) => (
+					<div onClick={() => handleSelected(country.name.common)} className='custom-option' key={index}>
+						<img className='flag-icon' src={country.flags.svg} />
+						<span className='ms-1'>{country.idd.root}</span>
+					</div>
+				));
 		}
+
+		return countryList.map((country, index) => (
+			<div onClick={() => handleSelected(country.name.common)} className='custom-option' key={index}>
+				<img className='flag-icon' src={country.flags.svg} />
+				<span className='ms-1'>{country.idd.root}</span>
+			</div>
+		));
 	};
 
 	let toggleDropdown = "custom-options ";
@@ -62,14 +74,7 @@ const CountryFlag = ({ countryList }) => {
 					<div onClick={(e) => e.stopPropagation()} className='filterCountry'>
 						<input onChange={(e) => filterCountry(e)} placeholder='Country' type='text' id='dropdown-filter' />
 					</div>
-					{countryList.map((country, index) => {
-						return (
-							<div onClick={() => handleSelected(country.name.common)} className='custom-option' key={index}>
-								<img className='flag-icon' src={country.flags.svg} />
-								<span className='ms-1'>{country.idd.root}</span>
-							</div>
-						);
-					})}
+					{displayFiltered(filter)}
 				</div>
 			</div>
 		</div>

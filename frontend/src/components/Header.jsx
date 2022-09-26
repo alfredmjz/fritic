@@ -12,6 +12,7 @@ export const Header = () => {
 		navigate("/fritic/users/register");
 	};
 
+	//const isLogin = () => {};
 	return (
 		<div className='container-fluid'>
 			<div className='row align-items-center'>

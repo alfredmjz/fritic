@@ -41,18 +41,20 @@ const CountryFlag = ({ countryList }) => {
 
 	const displayFiltered = () => {
 		if (filter !== "") {
-			return countryList
-				.filter((country) => country.name.common.toUpperCase().indexOf(filter.toUpperCase()) > -1)
-				.map((country, index) => (
-					<div onClick={() => handleSelected(country.name.common)} className='custom-option' key={index}>
-						<img className='flag-icon' src={country.flags.svg} />
-						<span className='ms-1'>{country.idd.root}</span>
-					</div>
-				));
+			return countryList.map((country) => {
+				if (country.name.common.toUpperCase().indexOf(filter.toUpperCase()) > -1) {
+					return (
+						<div onClick={() => handleSelected(country.name.common)} className='custom-option' key={country.latlng}>
+							<img className='flag-icon' src={country.flags.svg} />
+							<span className='ms-1'>{country.idd.root}</span>
+						</div>
+					);
+				}
+			});
 		}
 
-		return countryList.map((country, index) => (
-			<div onClick={() => handleSelected(country.name.common)} className='custom-option' key={index}>
+		return countryList.map((country) => (
+			<div onClick={() => handleSelected(country.name.common)} className='custom-option' key={country.latlng}>
 				<img className='flag-icon' src={country.flags.svg} />
 				<span className='ms-1'>{country.idd.root}</span>
 			</div>
@@ -72,7 +74,14 @@ const CountryFlag = ({ countryList }) => {
 				</div>
 				<div className={toggleDropdown}>
 					<div onClick={(e) => e.stopPropagation()} className='filterCountry'>
-						<input onChange={(e) => filterCountry(e)} placeholder='Country' type='text' id='dropdown-filter' />
+						<input
+							onChange={(e) => filterCountry(e)}
+							name='country-code'
+							placeholder='Country'
+							type='text'
+							id='dropdown-filter'
+							autoComplete='country-code'
+						/>
 					</div>
 					{displayFiltered(filter)}
 				</div>

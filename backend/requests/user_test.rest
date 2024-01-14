@@ -1,9 +1,0 @@
-###
-POST http://localhost:3001/api/v1/fritic/users HTTP/1.1
-Content-type: application/json
-
-{
-  "name": "root",
-  "email": "root@gmail.com",
-  "password": "root"
-}

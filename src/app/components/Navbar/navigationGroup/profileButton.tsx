@@ -26,7 +26,7 @@ const ProfileButton = () => {
       <DropdownTrigger>
         <Button
           radius="full"
-          className="bg-white mx-0 px-4 min-w-fit"
+          className="bg-beige-color mx-0 px-4 min-w-fit"
           startContent={<ProfileIcon width={15} />}
         >
           <Image src={threeDots} width={4} alt="Three Dots" />

@@ -12,6 +12,7 @@ const config: Config = {
     extend: {
       colors: {
         "main-theme": "#031D1B",
+        "beige-color": "#FDFFEF",
       },
     },
   },
